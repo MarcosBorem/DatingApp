@@ -1,46 +1,58 @@
+<!-- Define uma barra de navegação fixa no topo da página com uma classe de fundo escuro -->
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-    <div class="container">
-      <a class="navbar-brand" href="#">Datting App</a>
+  <div class="container">
+    <!-- Link para a marca ou nome do aplicativo -->
+    <a class="navbar-brand" href="#">Datting App</a>
 
-      <ul class="navbar-nav me-auto mb-2 mb-md-0" *ngIf="loggedIn">
-          <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="#">Matches</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Lists</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link">Messages</a>
-          </li>
-          <li class="nav-item"(click)="logout()">
-            <a class="nav-link">Logout</a>
-          </li>
-          
-        </ul>
+    <!-- Menu de navegação, exibido apenas quando o usuário está logado -->
+    <ul class="navbar-nav me-auto mb-2 mb-md-0" *ngIf="loggedIn">
+        <li class="nav-item">
+          <!-- Link para a seção Matches -->
+          <a class="nav-link" aria-current="page" href="#">Matches</a>
+        </li>
+        <li class="nav-item">
+          <!-- Link para a seção Lists -->
+          <a class="nav-link" href="#">Lists</a>
+        </li>
+        <li class="nav-item">
+          <!-- Link para a seção Messages -->
+          <a class="nav-link">Messages</a>
+        </li>
+      </ul>
 
-        <div class="dropdown" *ngIf="loggedIn">
-          <a class="dropdown-toggle text-light">Welcome user</a>
-          <div class="dropdown-menu">
-            <a class="dropwdown-item">Edit Profile</a>
-            <a class="dropwdown-item" (click)="logout()">Logout</a>
-          </div>
+      <!-- Menu dropdown exibido apenas quando o usuário está logado -->
+      <div class="dropdown" *ngIf="loggedIn" dropdown>
+        <!-- Toggle do dropdown que exibe o nome de boas-vindas ao usuário -->
+        <a class="dropdown-toggle text-light text-decoration-none" dropdownToggle>Welcome user</a>
+        <!-- Conteúdo do menu dropdown -->
+        <div class="dropdown-menu" *dropdownMenu>
+          <!-- Link para editar o perfil -->
+          <a class="dropdown-item">Edit Profile</a>
+          <!-- Link para fazer logout, chama o método logout() -->
+          <a class="dropdown-item" (click)="logout()">Logout</a>
         </div>
-
-        <form *ngIf="!loggedIn" #loginForm="ngForm" class="d-flex" (ngSubmit)="login()" autocomplete="off">
-          <input
-              name="username"
-              [(ngModel)]="model.username" 
-              class="form-control me-2" 
-              type="text" 
-              placeholder="Username">
-          <input
-              name="password"
-              [(ngModel)]="model.password"
-              class="form-control me-2"
-              type="password"
-              placeholder="Password">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Login</button>
-        </form>
       </div>
-  </nav>
+
+      <!-- Formulário de login, exibido apenas quando o usuário não está logado -->
+      <form *ngIf="!loggedIn" #loginForm="ngForm" class="d-flex" (ngSubmit)="login()" autocomplete="off">
+        <!-- Campo de entrada para o nome de usuário -->
+        <input
+            name="username"
+            [(ngModel)]="model.username" 
+            class="form-control me-2" 
+            type="text" 
+            placeholder="Username">
+        <!-- Campo de entrada para a senha -->
+        <input
+            name="password"
+            [(ngModel)]="model.password"
+            class="form-control me-2"
+            type="password"
+            placeholder="Password">
+        <!-- Campo de entrada para pesquisa (não funcional neste contexto) -->
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <!-- Botão de submissão do formulário de login -->
+        <button class="btn btn-outline-success" type="submit">Login</button>
+      </form>
+    </div>
+</nav>
