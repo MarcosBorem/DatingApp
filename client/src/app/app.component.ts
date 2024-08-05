@@ -35,6 +35,8 @@ complete: Executa quando a requisição é concluída, imprimindo uma mensagem n
 import { HttpClient } from '@angular/common/http';
 // Importa os decorators e interfaces necessárias do Angular
 import { Component, OnInit } from '@angular/core';
+import { AccountService } from './_services/account.service';
+import { User } from './_models/user';
 
 // Decorator @Component para definir o metadado do componente
 @Component({
@@ -48,10 +50,15 @@ export class AppComponent implements OnInit {
   users: any; // Propriedade que armazenará a lista de usuários
 
   // Construtor que injeta o serviço HttpClient para fazer requisições HTTP
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private accountService: AccountService) {}
 
   // Método ngOnInit que é executado quando o componente é inicializado
   ngOnInit(): void {
+    this.getUsers();
+    this.setCurrentUser();
+  }
+
+  getUsers(){
     // Faz uma requisição GET para obter a lista de usuários
     this.http.get('https://localhost:5001/api/users').subscribe({
       // Callback executado quando a resposta é recebida com sucesso
@@ -61,5 +68,12 @@ export class AppComponent implements OnInit {
       // Callback executado quando a requisição é concluída
       complete: () => console.log('Request has completed')
     });
+  }
+  
+  setCurrentUser(){
+    const userString = localStorage.getItem('user');
+    if (!userString) return;
+    const user: User = JSON.parse(userString);
+    this.accountService.setCurrentUser(user);
   }
 }

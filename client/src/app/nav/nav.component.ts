@@ -19,7 +19,16 @@ export class NavComponent implements OnInit {
   constructor(private accountService: AccountService) { }
 
   // Método ngOnInit que é executado quando o componente é inicializado
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.getCurrentUser(); //Persiste o usuario logado mesma se dar o refresh na página
+   }
+
+  getCurrentUser(){
+    this.accountService.currentUser$.subscribe({
+      next: user => this.loggedIn = !!user,
+      error: error => console.log(error)
+    })
+  }
 
   // Método login para realizar o login do usuário
   login() {
@@ -37,6 +46,7 @@ export class NavComponent implements OnInit {
 
   // Método logout para realizar o logout do usuário
   logout() {
+    this.accountService.logout();
     this.loggedIn = false; // Atualiza o estado para indicar que o usuário não está mais logado
   }
 }
