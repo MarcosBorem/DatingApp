@@ -5,7 +5,7 @@
     <a class="navbar-brand" href="#">Datting App</a>
 
     <!-- Menu de navegação, exibido apenas quando o usuário está logado -->
-    <ul class="navbar-nav me-auto mb-2 mb-md-0" *ngIf="loggedIn">
+    <ul class="navbar-nav me-auto mb-2 mb-md-0" *ngIf="accountService.currentUser$ | async">
         <li class="nav-item">
           <!-- Link para a seção Matches -->
           <a class="nav-link" aria-current="page" href="#">Matches</a>
@@ -21,7 +21,7 @@
       </ul>
 
       <!-- Menu dropdown exibido apenas quando o usuário está logado -->
-      <div class="dropdown" *ngIf="loggedIn" dropdown>
+      <div class="dropdown" *ngIf="accountService.currentUser$ | async" dropdown>
         <!-- Toggle do dropdown que exibe o nome de boas-vindas ao usuário -->
         <a class="dropdown-toggle text-light text-decoration-none" dropdownToggle>Welcome user</a>
         <!-- Conteúdo do menu dropdown -->
@@ -34,7 +34,7 @@
       </div>
 
       <!-- Formulário de login, exibido apenas quando o usuário não está logado -->
-      <form *ngIf="!loggedIn" #loginForm="ngForm" class="d-flex" (ngSubmit)="login()" autocomplete="off">
+      <form *ngIf="!(accountService.currentUser$ | async)" #loginForm="ngForm" class="d-flex" (ngSubmit)="login()" autocomplete="off">
         <!-- Campo de entrada para o nome de usuário -->
         <input
             name="username"
