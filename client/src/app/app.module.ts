@@ -15,13 +15,14 @@ import { AppComponent } from './app.component'; // Importa o componente principa
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; // Importa BrowserAnimationsModule para suportar animações
 import { NavComponent } from './nav/nav.component'; // Importa o componente de navegação
 import { FormsModule } from '@angular/forms'; // Importa FormsModule para trabalhar com formulários
-import { BsDropdownModule } from 'ngx-bootstrap/dropdown'; // Importa BsDropdownModule para utilizar dropdowns do ngx-bootstrap
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { HomeComponent } from './home/home.component'; // Importa BsDropdownModule para utilizar dropdowns do ngx-bootstrap
 
 @NgModule({
   // Declaração de componentes que pertencem a este módulo
   declarations: [
     AppComponent, // Declara o componente principal da aplicação
-    NavComponent // Declara o componente de navegação
+    NavComponent, HomeComponent // Declara o componente de navegação
   ],
   // Importação de outros módulos necessários para esta aplicação
   imports: [
